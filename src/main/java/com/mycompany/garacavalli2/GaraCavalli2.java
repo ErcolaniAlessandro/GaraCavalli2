@@ -11,34 +11,34 @@ public class GaraCavalli2 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Richiede la lunghezza della gara
+        
         System.out.print("Inserisci la lunghezza del percorso di gara (in metri): ");
         int lunghezzaGara = scanner.nextInt();
         scanner.nextLine();
 
-        // Richiede i nomi dei cavalli e le velocità
+        
         System.out.print("Inserisci i nomi dei cavalli separati da virgola: ");
         String[] nomiCavalli = scanner.nextLine().split(",");
 
         List<Cavallo> cavalli = new ArrayList<>();
 
-        // Crea i cavalli senza avviarli
+        
         for (String nome : nomiCavalli) {
             System.out.print("Inserisci la velocità di " + nome.trim() + " (metri al secondo): ");
             int velocita = scanner.nextInt();
             scanner.nextLine();
 
-            // Crea il cavallo con il nome e la velocità specificata
+            
             Cavallo cavallo = new Cavallo(nome.trim(), lunghezzaGara, velocita);
             cavalli.add(cavallo);
         }
 
-        // Avvia tutti i cavalli solo dopo aver raccolto le informazioni di tutti
+        
         for (Cavallo cavallo : cavalli) {
             cavallo.start();
         }
 
-        // Attende la fine di tutti i thread
+        
         for (Cavallo cavallo : cavalli) {
             try {
                 cavallo.join();
@@ -47,7 +47,7 @@ public class GaraCavalli2 {
             }
         }
 
-        // Classifica dei primi 3 cavalli
+        
         List<Cavallo> classifica = new ArrayList<>(cavalli);
         Collections.sort(classifica, Comparator.comparingInt(Cavallo::getDistanzaPercorsa).reversed());
 
